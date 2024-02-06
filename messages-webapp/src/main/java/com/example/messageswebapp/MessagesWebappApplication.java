@@ -8,7 +8,6 @@ import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.Map;
@@ -39,7 +38,7 @@ class WebappController {
     }
 
     @GetMapping("/")
-    String index(Map<String, Object> attrs) {
+    String index(Map<String, Object> attrs ) {
 
         var messageFromApi = Objects.requireNonNull(this.http
                         .get()
