@@ -16,8 +16,6 @@ repositories {
 }
 
 dependencies {
-	testImplementation 'org.springframework.experimental.boot:spring-boot-testjars:0.0.1'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
