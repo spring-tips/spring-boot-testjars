@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestClient;
@@ -38,14 +40,16 @@ class WebappController {
     }
 
     @GetMapping("/")
-    String index(Map<String, Object> attrs ) {
+    String index(Map<String, Object> attrs, @RegisteredOAuth2AuthorizedClient("spring") OAuth2AuthorizedClient client) {
+
+        var token = client.getAccessToken().getTokenValue();
 
         var messageFromApi = Objects.requireNonNull(this.http
                         .get()
                         .uri(this.uri)
+                        .headers(h -> h.setBearerAuth(token))
                         .retrieve()
-                        .toEntity(new ParameterizedTypeReference<Map<String, String>>() {
-                        })
+                        .toEntity(new ParameterizedTypeReference<Map<String, String>>() {})
                         .getBody())
                 .get("message");
 

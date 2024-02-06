@@ -17,7 +17,7 @@ import java.util.Map;
 public class MessagesApiApplication {
 
     @GetMapping("/hello")
-    Map<String, String> hello(@AuthenticationPrincipal Principal principal) {
+    Map<String, String> hello(  Principal principal) {
         return Map.of("message", "hello, " + principal.getName() + "!");
     }
 
